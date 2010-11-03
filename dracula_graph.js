@@ -11,6 +11,8 @@
  *  The algorithm is based on a spring-style layouter of a Java-based social
  *  network tracker PieSpy written by Paul Mutton E<lt>paul@jibble.orgE<gt>.
  *
+ *  Tree Layout code is contributed by Grigory Kruglov <grigory.kruglov@gmail.com>.
+ *
  *  This code is freely distributable under the terms of an MIT-style license.
  *  For details, see the Graph web site: http://dev.buildpatternd.com/trac
  *
@@ -230,6 +232,164 @@ Graph.Renderer.Raphael.prototype = {
     }
 };
 Graph.Layout = {};
+
+/*
+ * Tree layout support.
+ * (c) 2010 Grigory Kruglov
+*/
+Graph.Layout.Tree = function(graph) {
+	this.graph = graph;
+};
+
+Graph.Layout.Tree.prototype = {
+	layout: function() {
+		this.layoutPrepare();
+		
+		this.layoutVertically();
+		this.layoutHorizontally();
+		
+		this.layoutCalculateBounds();
+    },
+
+	layoutPrepare: function() {
+		for (i in this.graph.nodelist) {
+			var node = this.graph.nodelist[i];
+			node.layoutPosX = 0;
+			node.layoutPosY = 0;
+			node.layoutForceX = 0;
+			node.layoutForceY = 0;
+		}
+		
+		// "root" is currently the first node encountered without parent(s)
+		this.root = this.getRoot() || this.graph.nodelist[0];
+		
+		// depth will be calculated as part of vertical layout
+		this.depth = 0;
+		
+		// depth "levels" are filled out during vertical layout
+		this.levels = {};
+    },
+
+	layoutCalculateBounds: function() {
+		var minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
+
+		for (i in this.graph.nodes) {
+			var x = this.graph.nodes[i].layoutPosX;
+			var y = this.graph.nodes[i].layoutPosY;
+                      
+			if (x > maxx) maxx = x;
+			if (x < minx) minx = x;
+			if (y > maxy) maxy = y;
+			if (y < miny) miny = y;
+		}
+
+		this.graph.layoutMinX = minx;
+		this.graph.layoutMaxX = maxx;
+		this.graph.layoutMinY = miny;
+		this.graph.layoutMaxY = maxy;
+    },
+	
+	/*
+	 * Position nodes according to their depth (distance from the root node)
+	*/
+	layoutVertically: function() {
+		var node, distanceToRoot;
+		
+		for (i in this.graph.nodelist) {
+			node = this.graph.nodelist[i];
+			distanceToRoot = this.getDepth(node);
+			
+			// add node to appropriate depth level
+			if (typeof(this.levels[distanceToRoot]) == "undefined") this.levels[distanceToRoot] = [];
+			this.levels[distanceToRoot].push(node);
+			
+			if (this.depth < distanceToRoot) this.depth = distanceToRoot;
+			
+			node.layoutPosY += distanceToRoot;
+		}
+	},
+	
+	/*
+	 * Position nodes within their depth levels
+	*/
+	layoutHorizontally: function() {
+		var node, c;
+		
+		for (i = 0; i <= this.depth; i++) {
+			c = this.levels[i].length - 1;
+			for (j in this.levels[i]) {
+				node = this.levels[i][j];
+				node.layoutPosX = (j - c) * i;
+				c--;
+			}
+		}
+	},
+	
+	getRoot: function() {
+		for (i in this.graph.nodes) {
+			if (this.countOutgoingEdges(this.graph.nodes[i]) == 0) {
+				return this.graph.nodes[i];
+			}
+		}
+		return false;
+	},
+	
+	getDepth: function(node) {
+		if (node == this.root) return 0;
+		return this.getDepthRecursive(this.getTargetNodes(node), 1);
+	},
+	
+	getDepthRecursive: function(nodes, distance) {
+		for (i in nodes) {
+			if (nodes[i] == this.root) {
+				return distance;
+			}
+		}
+		
+		var minDistance = Infinity;
+		for (i in nodes) {
+			d = this.getDepthRecursive(this.getTargetNodes(nodes[i]), distance + 1);
+			if (d < minDistance) {
+				minDistance = d;
+			}
+		}
+		
+		return minDistance;
+	},
+
+	getTargetNodes: function(node) {
+		var nodes = [];
+		for (var i = 0; i < this.graph.edges.length; i++) {
+			if (this.graph.edges[i].source == node) {
+				nodes.push(this.graph.edges[i].target);
+			}
+		}
+		return nodes;
+	},
+	
+	getSourceNodes: function(node) {
+		var nodes = [];
+		for (var i = 0; i < this.graph.edges.length; i++) {
+			if (this.graph.edges[i].target == node) {
+				nodes.push(this.graph.edges[i].source);
+			}
+		}
+		return nodes;
+	},
+	
+	countOutgoingEdges: function(node) {
+		var count = 0;
+		for (var i = 0; i < this.graph.edges.length; i++) {
+			var edge = this.graph.edges[i];
+			if (edge.source == node) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
+}
+
 Graph.Layout.Spring = function(graph) {
                 this.graph = graph;
                 this.iterations = 500;
@@ -255,7 +415,6 @@ Graph.Layout.Spring.prototype = {
                         node.layoutForceX = 0;
                         node.layoutForceY = 0;
                 }
-                
         },
        
         layoutCalcBounds: function() {
