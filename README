@@ -22,8 +22,6 @@ Original "readme" extracted from code:
  *  The algorithm is based on a spring-style layouter of a Java-based social
  *  network tracker PieSpy written by Paul Mutton E<lt>paul@jibble.orgE<gt>.
  *
- *  Tree Layout code is contributed by Grigory Kruglov <grigory.kruglov@gmail.com>.
- *
  *  This code is freely distributable under the terms of an MIT-style license.
  *  For details, see the Graph web site: http://dev.buildpatternd.com/trac
  *
