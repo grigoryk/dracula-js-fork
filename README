@@ -6,3 +6,38 @@ After building a directed graph "g", perform tree layout likes this:
  layouter.layout();
 
 (c) 2010 Grigory Kruglov, <grigory.kruglov@gmail.com>
+
+Original "readme" extracted from code:
+
+
+ *  Dracula Graph Layout and Drawing Framework 0.0.3alpha
+ *  (c) 2010 Philipp Strathausen <strathausen@gmail.com>, http://strathausen.eu
+ *
+ *  based on the Graph JavaScript framework, version 0.0.1
+ *  (c) 2006 Aslak Hellesoy <aslak.hellesoy@gmail.com>
+ *  (c) 2006 Dave Hoover <dave.hoover@gmail.com>
+ *
+ *  Ported from Graph::Layouter::Spring in
+ *    http://search.cpan.org/~pasky/Graph-Layderer-0.02/
+ *  The algorithm is based on a spring-style layouter of a Java-based social
+ *  network tracker PieSpy written by Paul Mutton E<lt>paul@jibble.orgE<gt>.
+ *
+ *  Tree Layout code is contributed by Grigory Kruglov <grigory.kruglov@gmail.com>.
+ *
+ *  This code is freely distributable under the terms of an MIT-style license.
+ *  For details, see the Graph web site: http://dev.buildpatternd.com/trac
+ *
+ *  Links:
+ *
+ *  Graph Dracula JavaScript Framework:
+ *      http://graphdracula.net
+ *
+ *  Demo of the original applet:
+ *      http://redsquirrel.com/dave/work/webdep/
+ *
+ *  Mirrored original source code at snipplr:
+ *      http://snipplr.com/view/1950/graph-javascript-framework-version-001/
+ *
+ *  Original usage example:
+ *      http://ajaxian.com/archives/new-javascriptcanvas-graph-library
+ *
