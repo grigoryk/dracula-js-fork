@@ -1,0 +1,8 @@
+Please see the official home page for usage examples: http://www.graphdracula.net/
+
+This fork adds Tree Layout mode. It is intended for drawing Directed Graphs.
+After building a directed graph "g", perform tree layout likes this:
+ var layouter = new Graph.Layout.Tree(g);
+ layouter.layout();
+
+(c) 2010 Grigory Kruglov, <grigory.kruglov@gmail.com>
