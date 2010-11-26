@@ -313,13 +313,14 @@ Graph.Layout.Tree.prototype = {
 	 * Position nodes within their depth levels
 	*/
 	layoutHorizontally: function() {
-		var node, c;
+		var node, c, f;
 		
 		for (i = 0; i <= this.depth; i++) {
 			c = this.levels[i].length - 1;
 			for (j in this.levels[i]) {
 				node = this.levels[i][j];
-				node.layoutPosX = (j - c) * i;
+				f = (j - c) | 1;
+				node.layoutPosX = f * i;
 				c--;
 			}
 		}
