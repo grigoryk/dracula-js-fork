@@ -1,41 +1,55 @@
-Please see the official home page for usage examples: http://www.graphdracula.net/
+You have reached https://github.com/wowstrongdrink/dracula-js-fork.
+This is a fork of the Dracula Graph Layout and Drawing Framework
+  (http://www.graphdracula.net)
+        
+The purpose of this fork is to publish any bug fixes or minor
+enhancements that prove necessary in the process of completing
+a project using this library.
 
-This fork adds Tree Layout mode. It is intended for drawing Directed Graphs.
-After building a directed graph "g", perform tree layout like this:
- var layouter = new Graph.Layout.Tree(g);
- layouter.layout();
+Code added in this fork is covered by the following copyright:
+Copyright (c) 2010 Riverdale Technologies, Inc. <msiegel@riverdaletechinc.com>
 
-(c) 2010 Grigory Kruglov, <grigory.kruglov@gmail.com>
+The upstream github project is https://github.com/grigoryk/dracula-js-fork,
+which in turn will try to push features and fixes to the original project
+  (https://launchpad.net/dracula)
 
-Original "readme" extracted from code:
-
-
- *  Dracula Graph Layout and Drawing Framework 0.0.3alpha
- *  (c) 2010 Philipp Strathausen <strathausen@gmail.com>, http://strathausen.eu
- *
- *  based on the Graph JavaScript framework, version 0.0.1
- *  (c) 2006 Aslak Hellesoy <aslak.hellesoy@gmail.com>
- *  (c) 2006 Dave Hoover <dave.hoover@gmail.com>
- *
- *  Ported from Graph::Layouter::Spring in
- *    http://search.cpan.org/~pasky/Graph-Layderer-0.02/
- *  The algorithm is based on a spring-style layouter of a Java-based social
- *  network tracker PieSpy written by Paul Mutton E<lt>paul@jibble.orgE<gt>.
- *
- *  This code is freely distributable under the terms of an MIT-style license.
- *  For details, see the Graph web site: http://dev.buildpatternd.com/trac
- *
- *  Links:
- *
- *  Graph Dracula JavaScript Framework:
- *      http://graphdracula.net
- *
- *  Demo of the original applet:
- *      http://redsquirrel.com/dave/work/webdep/
- *
- *  Mirrored original source code at snipplr:
- *      http://snipplr.com/view/1950/graph-javascript-framework-version-001/
- *
- *  Original usage example:
- *      http://ajaxian.com/archives/new-javascriptcanvas-graph-library
- *
+ * Please see the official home page for usage examples: http://www.graphdracula.net/
+ * 
+ * This fork adds Tree Layout mode. It is intended for drawing Directed Graphs.
+ * After building a directed graph "g", perform tree layout like this:
+ *  var layouter = new Graph.Layout.Tree(g);
+ *  layouter.layout();
+ * 
+ * (c) 2010 Grigory Kruglov, <grigory.kruglov@gmail.com>
+ * 
+ * Original "readme" extracted from code:
+ * 
+ * *  Dracula Graph Layout and Drawing Framework 0.0.3alpha
+ * *  (c) 2010 Philipp Strathausen <strathausen@gmail.com>, http://strathausen.eu
+ * *
+ * *  based on the Graph JavaScript framework, version 0.0.1
+ * *  (c) 2006 Aslak Hellesoy <aslak.hellesoy@gmail.com>
+ * *  (c) 2006 Dave Hoover <dave.hoover@gmail.com>
+ * *
+ * *  Ported from Graph::Layouter::Spring in
+ * *    http://search.cpan.org/~pasky/Graph-Layderer-0.02/
+ * *  The algorithm is based on a spring-style layouter of a Java-based social
+ * *  network tracker PieSpy written by Paul Mutton E<lt>paul@jibble.orgE<gt>.
+ * *
+ * *  This code is freely distributable under the terms of an MIT-style license.
+ * *  For details, see the Graph web site: http://dev.buildpatternd.com/trac
+ * *
+ * *  Links:
+ * *
+ * *  Graph Dracula JavaScript Framework:
+ * *      http://graphdracula.net
+ * *
+ * *  Demo of the original applet:
+ * *      http://redsquirrel.com/dave/work/webdep/
+ * *
+ * *  Mirrored original source code at snipplr:
+ * *      http://snipplr.com/view/1950/graph-javascript-framework-version-001/
+ * *
+ * *  Original usage example:
+ * *      http://ajaxian.com/archives/new-javascriptcanvas-graph-library
+ * *

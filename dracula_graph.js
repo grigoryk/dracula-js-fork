@@ -521,10 +521,16 @@ Graph.Layout.Spring.prototype = {
 /*
  * usefull JavaScript extensions, 
  */
-//Array.prototype.forEach = function(f) {
-//     var l = this.length;
-//     for( var i = 0; i < l; i++) f(this[i]);
-//};
+
+// Only define Array.forEach if not provided by browser (IE)
+if ( !Array.prototype.forEach ) {
+  Array.prototype.forEach = function( f ) {
+    var l = this.length;
+    for ( var i = 0; i < l; i++ ) {
+      f( this[i] );
+    }
+  };
+}
 
 function log(a) {console.log&&console.log(a);}
 
